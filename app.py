@@ -26,7 +26,7 @@ def index():
         cursor.execute('''
             SELECT name, deadline_days, deadline_time FROM stores
             WHERE keywords LIKE ?
-        ''', (f'%{selected_store}%', f'%{selected_store}%'))
+        ''', (f'%{selected_store}%',))
         results = cursor.fetchall()
         conn.close()
 

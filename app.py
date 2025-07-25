@@ -25,15 +25,16 @@ def index():
         cursor = conn.cursor()
         cursor.execute('''
             SELECT name, deadline_days, deadline_time FROM stores
-            WHERE name LIKE ? OR keywords LIKE ?
+            WHERE keywords LIKE ?
         ''', (f'%{selected_store}%', f'%{selected_store}%'))
         results = cursor.fetchall()
         conn.close()
 
         if results:
             for name, deadline_days, deadline_time in results:
+                # [!] deadline_days는 int로 변환 필수!
                 selected = datetime.strptime(selected_date, '%Y-%m-%d')
-                deadline_date = selected - timedelta(days=deadline_days)
+                deadline_date = selected - timedelta(days=int(deadline_days))
                 reservation_deadline = deadline_date.strftime('%Y년 %m월 %d일 ') + deadline_time
                 reservation_results.append({
                     'name': name,

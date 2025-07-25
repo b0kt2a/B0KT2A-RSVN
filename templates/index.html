@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>B0K_T2A RSVN</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            background: #f6f8fa;
+            font-family: 'Noto Sans KR', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .center-box {
+            background: #fff;
+            padding: 36px 28px 34px 28px;
+            border-radius: 18px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            width: 340px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #222245;
+        }
+        form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+        }
+        form label {
+            font-size: 1em;
+            color: #284b63;
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        input[type="date"],
+        input[list], input[type="text"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #b0bec5;
+            border-radius: 7px;
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+            transition: border 0.2s;
+            margin-top: 5px;
+        }
+        input:focus {
+            border-color: #3d5af1;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 12px 0;
+            background: #3d5af1;
+            color: #fff;
+            border: none;
+            border-radius: 7px;
+            font-size: 1.12em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #263eab;
+        }
+        .store-name-result {
+            font-size: 1.22em;
+            font-weight: bold;
+            color: #223089;
+            margin-bottom: 4px;
+            text-align: center;
+        }
+        .deadline-result {
+            margin-top: 20px;
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #3d5af1;
+            text-align: center;
+        }
+        /* ===== footer ===== */
+        footer {
+            width: 100%;
+            text-align: center;
+            color: #aaa;
+            font-size: 0.8em;
+            background: transparent;
+            margin: 28px 0 0 0;    /* 위쪽에만 여백 */
+            padding: 0;
+            border: none;
+        }
+        footer span {
+            font-size: 0.5em;
+        }
+        @media (max-width: 500px) {
+            .center-box {
+                width: 96vw;
+                max-width: 340px;
+                padding: 24px 5vw 20px 5vw;
+            }
+            footer {
+                font-size: 0.8em;
+                margin-top: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="center-box">
+        <h1>예약일 조회</h1>
+        <form method="POST" autocomplete="off">
+            <label>플레이 날짜 선택:
+                <input type="date" name="date" required value="{{ selected_date }}" autocomplete="off">
+            </label>
+            <label>매장명 또는 테마명:
+                <input type="text" name="store" placeholder="테마명 일부 입력 가능 (예: 에디)" required value="{{ selected_store }}" autocomplete="off">
+            </label>
+            <input type="submit" value="조회하기" class="submit-btn">
+        </form>
+        <br><br><br>
+    {% if reservation_results is not none %}
+        {% if reservation_results|length > 0 %}
+            <h2>예약해야 할 날짜/시간</h2>
+            <ul style="padding-left:0;list-style:none;" text-align="center;">
+                {% for res in reservation_results %}
+                    <li style="margin-bottom: 16px;" text-align="center;">
+                        <div class="store-name-result">[{{ res.name }}]</div>
+                        <div class="deadline-result">{{ res.deadline }}</div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div style="margin-top:20px; color:crimson;">해당 매장을 찾을 수 없습니다.</div>
+        {% endif %}
+    {% endif %}
+    </div>
+    <!-- footer는 center-box 밖에! -->
+    <footer>
+      &copy; 2025 <SPAN STYLE="COLOR:#ff80b0; font-size:1.0em; font-weight:600;">B0K_T2A</SPAN>. All rights reserved.<br>
+      <span>Made with <span style="color:#ff80b0;">PEACH BOT</span></span>
+    </footer>
+</body>
+</html>

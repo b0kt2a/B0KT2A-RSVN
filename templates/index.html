@@ -125,10 +125,10 @@
     <div class="center-box">
         <h1>예약일 조회</h1>
         <form method="POST" autocomplete="off">
-            <label>플레이 날짜 선택:
+            <label>플레이 예정 날짜를 선택해 주세요
                 <input type="date" name="date" required value="{{ selected_date }}" autocomplete="off">
             </label>
-            <label>매장명 또는 테마명:
+            <label>테마명으로 검색해 주세요
                 <input type="text" name="store" placeholder="테마명 일부 입력 가능 (예:필바에,바여름)" required value="{{ selected_store }}" autocomplete="off">
             </label>
             <input type="submit" value="조회하기" class="submit-btn">

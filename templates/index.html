@@ -137,14 +137,17 @@
     {% if reservation_results is not none %}
         {% if reservation_results|length > 0 %}
             <h2>예약해야 할 날짜/시간</h2>
-            <ul style="padding-left:0;list-style:none;" text-align="center;">
-                {% for res in reservation_results %}
-                    <li style="margin-bottom: 16px;" text-align="center;">
-                        <div class="store-name-result">[{{ res.name }}]</div>
-                        <div class="deadline-result">{{ res.deadline }}</div>
-                    </li>
-                {% endfor %}
-            </ul>
+           <ul style="padding-left:0;list-style:none;" text-align="center;">
+    {% for res in reservation_results %}
+        <li style="margin-bottom: 16px;" text-align="center;">
+            <div class="store-name-result">[{{ res.name }}]</div>
+            <div class="deadline-result">{{ res.deadline }}</div>
+            {% if res.memo %}
+                <div style="font-size: 0.95em; color: #666; margin-top: 4px;">{{ res.memo }}</div>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
         {% else %}
             <div style="margin-top:20px; color:crimson;">해당 매장을 찾을 수 없습니다.</div>
         {% endif %}

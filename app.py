@@ -1,8 +1,13 @@
 from flask import Flask, render_template, request
 import sqlite3
 from datetime import datetime, timedelta
+import re  # 이거 추가해야 돼!
 
 app = Flask(__name__)
+
+# 🔗 링크에 target="_blank" 자동 추가하는 함수
+def add_target_blank(html):
+    return re.sub(r'<a\s+(?![^>]*target)', r'<a target="_blank" ', html)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -34,16 +39,17 @@ def index():
 
         for name, deadline_days, deadline_time, always_open, fixed_note, memo in results:
             if always_open and int(always_open) == 1:
-                # always_open이 1일 때
                 deadline = fixed_note if fixed_note else '상시 예약 가능'
             elif deadline_days is not None and deadline_time:
-                # 일반적인 마감 계산
                 selected = datetime.strptime(selected_date, '%Y-%m-%d')
                 deadline_date = selected - timedelta(days=int(deadline_days))
                 deadline = deadline_date.strftime('%Y년 %m월 %d일 ') + deadline_time
             else:
-                # 정보 부족할 때
                 deadline = fixed_note if fixed_note else '정보 없음'
+
+            # ✨ memo에 target="_blank" 자동 삽입
+            if memo:
+                memo = add_target_blank(memo)
 
             reservation_results.append({
                 'name': name,

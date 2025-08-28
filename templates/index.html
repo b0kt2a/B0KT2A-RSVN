@@ -94,6 +94,12 @@
             color: #3d5af1;
             text-align: center;
         }
+        a {
+            color: #0796c2;
+            text-decoration: underline;
+        }
+    
+
         /* ===== footer ===== */
         footer {
             width: 100%;
@@ -119,13 +125,6 @@
                 margin-top: 18px;
             }
         }
-        a {
-            color: #0796c2;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        
     </style>
 </head>
 <body>
@@ -141,7 +140,7 @@
             <input type="submit" value="조회하기" class="submit-btn">
         </form>
         <br><br><br>
-    {% if reservation_results is not none %}
+     {% if reservation_results is not none %}
         {% if reservation_results|length > 0 %}
             <h2>예약해야 할 날짜/시간</h2>
            <ul style="padding-left:0;list-style:none;" text-align="center;">
@@ -153,13 +152,13 @@
                 <div style="font-size: 1.02em; color: #0796c2; margin-top: 10px; text-align: center; font-weight: bold;">
     {{ res.memo | safe}}
 </div>
-            {% endif %}
-        </li>
-    {% endfor %}
-</ul>
-        {% else %}
+             {% endif %}
+             </li>
+             {% endfor %}
+            </ul>
+         {% else %}
             <div style="margin-top:20px; color:crimson;">해당 매장을 찾을 수 없습니다.</div>
-        {% endif %}
+         {% endif %}
     {% endif %}
     </div>
     <!-- footer는 center-box 밖에! -->

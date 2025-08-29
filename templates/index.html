@@ -19,7 +19,7 @@
         }
         .center-box {
             background: #fff;
-            padding: 36px 28px 34px 28px;
+            padding: 36px 28px 20px 28px;
             border-radius: 18px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
             width: 340px;
@@ -31,8 +31,8 @@
         h1, h2 {
             text-align: center;
             margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 1.3em;
+            margin-bottom: 10px;
+            font-size: 1.2em;
             font-weight: 700;
             color: #222245;
         }
@@ -81,14 +81,14 @@
             background: #263eab;
         }
         .store-name-result {
-            font-size: 1.22em;
+            font-size: 1.15em;
             font-weight: bold;
             color: #223089;
-            margin-bottom: 4px;
             text-align: center;
         }
         .deadline-result {
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 4px;
             font-size: 1.15em;
             font-weight: 600;
             color: #3d5af1;
@@ -139,13 +139,13 @@
             </label>
             <input type="submit" value="조회하기" class="submit-btn">
         </form>
-        <br><br><br>
+        <br>
      {% if reservation_results is not none %}
         {% if reservation_results|length > 0 %}
             <h2>예약해야 할 날짜/시간</h2>
            <ul style="padding-left:0;list-style:none;" text-align="center;">
     {% for res in reservation_results %}
-        <li style="margin-bottom: 16px;" text-align="center;">
+        <li style="margin-bottom: 10px;" text-align="center;">
             <div class="store-name-result">[{{ res.name }}]</div>
             <div class="deadline-result">{{ res.deadline }}</div>
             {% if res.memo %}
